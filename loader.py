@@ -3,7 +3,7 @@ from strategies import *
 class StrategyLoader(object):
     def __init__(self, payoff_table, name_1, name_2, strategy_dict,
                          GAMMA, ALPHA, n_states, n_actions, input_dims):
-        #self.available_strategies = ['TIT_FOR_TAT', 'GROFMAN', 'CUNY']
+        # available strategies = ['TIT_FOR_TAT', 'GROFMAN', 'CUNY']
         self.strategy_dict = strategy_dict
         self.n_actions = n_actions 
         self.payoff_table = payoff_table
