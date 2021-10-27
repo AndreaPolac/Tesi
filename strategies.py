@@ -1,5 +1,3 @@
-## METTERE ATTRIBUTO NOME IN MODO DA CARICARE CON IL LOADER
-# (NAME, GAMMA.....)
 class Strategy(object):
     def __init__(self, GAMMA, ALPHA, n_states, n_actions, input_dims):
         self.GAMMA = GAMMA
