@@ -81,3 +81,8 @@ class CUNY(Strategy):
             
         return action 
     
+Strategy_Dict = {'TIT_FOR_TAT' : TIT_FOR_TAT,
+                'GROFMAN' : GROFMAN,
+                'CUNY' : CUNY}
+
+
