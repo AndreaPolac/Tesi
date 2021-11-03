@@ -1,48 +1,27 @@
 from strategies import *
 
 class StrategyLoader(object):
-    def __init__(self, payoff_table, name_1, name_2, strategy_dict,
-                         GAMMA, ALPHA, n_states, n_actions, input_dims):
-        # available strategies = ['TIT_FOR_TAT', 'GROFMAN', 'CUNY']
+    def __init__(self, payoff_table, strategy_dict, GAMMA, ALPHA, n_states, n_actions):
         self.strategy_dict = strategy_dict
         self.n_actions = n_actions 
         self.payoff_table = payoff_table
-       
-        self.check_strategies(name_1, name_2)
+        self.GAMMA = GAMMA
+        self.ALPHA = ALPHA 
+        self.n_states = n_states
+        self.n_actions = n_actions
         
-        self.init_strategies(name_1, name_2, GAMMA, ALPHA, 
-                                    n_states, n_actions, input_dims)
-        
-        #self.file_1 = name_1 + '.py'
-        #self.file_2 = name_2 + '.py'
-        #self.strategies_path = strategies_path
-        #self.strategy_names = os.listdir(self.strategies_path)
+        self.strategies = {}
 
-    def check_strategies(self):
+    def check_strategy(self, name):
         # check if strategies are available
-        assert(self.name_1 in self.strategy_dict)
-        assert(self.name_2 in self.strategy_dict)
-        
+        assert(name in self.strategy_dict)
         # check if the strategy can be applied to the current game
         assert(self.n_actions == self.payoff_table.shape[0])
         
-        # check if the strategy name is in the directory
-        #assert(self.file_1 in self.strategy_names)
-        #assert(self.file_2 in self.strategy_names)
-        
-    def init_strategies(self, name_1, name_2, GAMMA, ALPHA, 
-                                n_states, n_actions, input_dims): 
-        S_1 = self.strategy_dict[name_1]
-        S_2 = self.strategy_dict[name_2]            
-        
-        self.strategy_1 = S_1(GAMMA, ALPHA, n_states, 
-                                       n_actions, input_dims)
-        self.strategy_2 = S_2(GAMMA, ALPHA, n_states, 
-                                       n_actions, input_dims)        
+    def init_strategy(self, name): 
+        S = self.strategy_dict[name]
+        strategy = S(self.GAMMA, self.ALPHA, self.n_states, self.n_actions)
+        self.strategies[name] = strategy      
     
-    def get_strategies(self):
-        return self.strategy_1, self.strategy_2
-    
-    def get_payoffs(self):
-        return self.payoff_table
-        
+    def get_strategy(self, name):
+        return self.strategies[name]
